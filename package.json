@@ -1,0 +1,28 @@
+{
+  "name": "nodejs-byrtopten",
+  "version": "1.0.0",
+  "description": "A nodejs-spider that gets the needed information of top-ten in bbs.byr.cn",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Molunerfinn/nodejs-ByrTopTen-spider.git"
+  },
+  "keywords": [
+    "top-ten"
+  ],
+  "author": "Molunerfinn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Molunerfinn/nodejs-ByrTopTen-spider/issues"
+  },
+  "homepage": "https://github.com/Molunerfinn/nodejs-ByrTopTen-spider#readme",
+  "dependencies": {
+    "cheerio": "^0.20.0",
+    "node-schedule": "^1.0.0",
+    "superagent": "^1.7.2",
+    "superagent-charset": "^0.1.1"
+  }
+}
