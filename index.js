@@ -7,10 +7,11 @@ var url = 'http://bbs.byr.cn/rss/topten';
 
 var rule = new schedule.RecurrenceRule();  
 var rule2 = new schedule.RecurrenceRule(); 
+
 rule.hour = 0;
 rule.minute = 55;
-rule.hour = 6;
-rule.minute = 0;
+rule2.hour = 6;
+rule2.minute = 0;
 
 var toptens = [];
 var toptensDay = [];
@@ -28,7 +29,7 @@ var j = schedule.scheduleJob(rule, function(){
       });
       
       var d = new Date();
-      var date = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+      var date = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()-1);
 
       var topten = {
         date: date,
@@ -73,14 +74,14 @@ var job = schedule.scheduleJob(rule2, function(){
       var d = new Date();
       var date = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
 
-      var topten = {
+      var toptenDay = {
         date: date,
         info: []
       };
 
       $('item').each(function(i,el){
         i += 1;
-        topten.info.push({
+        toptenDay.info.push({
           topno: i,
           title: $(this).find('title').text(),
           author: $(this).find('author').text(),
@@ -90,7 +91,7 @@ var job = schedule.scheduleJob(rule2, function(){
           content: $(this).find('description').text()
         })
       })
-      toptensDay.unshift({topten: topten});
+      toptensDay.unshift({toptenDay: toptenDay});
 
       var json = JSON.stringify(toptensDay);
 
