@@ -23,6 +23,8 @@
     "cheerio": "^0.20.0",
     "node-schedule": "^1.0.0",
     "superagent": "^1.7.2",
-    "superagent-charset": "^0.1.1"
+    "superagent-charset": "^0.1.1",
+    "mongodb": "^1.4",
+    "monk": "^1.0.1"
   }
 }

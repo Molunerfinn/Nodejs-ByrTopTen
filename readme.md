@@ -4,6 +4,14 @@
 
 ## 更新日志
 
+### v1.0 pro-c
+
+- 代码整合大幅精简，感谢@BUPT-HJM的启发
+- 加入写入mongodb数据库功能
+- 更改写出的json文件形式
+- 更改爬取时间
+- 忽略node_modules文件夹，改为用户自行安装所需依赖
+
 ### v1.0 pro-b
 
 - 修复了一个小bug，这个bug会导致`toptensDay.json`不按预期时间输出。
@@ -19,7 +27,16 @@
 
 ## 使用方法
 
-命令行内输入`node index.js`，将会自动执行定时程序。在0点55分的时候就会生成一个叫做`toptens.json`，在6点00分的时候会生成`toptensDay.json`。如果你不想特定时间看到效果，想直接输出json文件的话，那么只需要将`index.js`的文件里的包含在`superagent`的外部计时功能去掉即可。
+**首先需要在本地配置好mongodb数据库。这个部分不再赘述，教程很多。只需配置好mongodb并开启它的服务即可。**
+
+然后在命令行内输入**`npm install`**，将会安装所需依赖。如果你安装了cnpm的话，我也推荐你用**`cnpm install`**来安装，会更快。  
+
+接着在命令行输入**`node index.js`**，程序将运行，在23点55分的时候就会生成一个叫做`toptens-date.json`，在6点00分的时候会生成`toptensDay-date.json`，其中的`date`将会是当天的日期。  
+
+如果你想要立刻看到效果的话，可以将
+`var nightJob = schedule.scheduleJob('* 55 23 * * *', function(){toptenSpider(toptens,'toptens',1,false)});`或者`var dayJob = schedule.scheduleJob('* 0 6 * * *', function(){toptenSpider(toptensDay,'toptensDay',2,false)});`里面的`* 55 23 * * *`或者`* 0 6 * * *`改成你想要输出的时间段，比如`45 * * * * *`就是每45秒执行一次。具体的语法可以参见[node-schedule](https://github.com/node-schedule/node-schedule#cron-style-scheduling)中cron-style语法。  
+
+`toptenSpider(dbName,collectionName,flag,fileFlag)`这个函数里，**如果将最后一个参数fileFlag设为false将不会输出json文件**。
 
 输出的格式：  
 
@@ -36,19 +53,6 @@
       link: *,      // 文章链接地址
       content: *    // 文章内容
     }]
-  },
-  topten:{
-    date: *,        // 日期
-    info:[{
-      topno: i,     // 在十大里的顺序
-      title: *,     // 标题
-      author: *,    // 作者
-      pubDate: *,   // 发布日期
-      boardName: *, // 发布版面
-      link: *,      // 文章链接地址
-      content: *    // 文章内容
-    }]
-  },
-  ...
+  }
 ]
 ```
